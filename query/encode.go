@@ -292,7 +292,7 @@ func valueString(v reflect.Value, opts tagOptions, sf reflect.StructField) strin
 	}
 
 	if v.CanConvert(timeType) {
-		t := v.Convert(timeType)
+		t := v.Convert(timeType).Interface()
 		if opts.Contains("unix") {
 			return strconv.FormatInt(t.Unix(), 10)
 		}
@@ -331,7 +331,7 @@ func isEmptyValue(v reflect.Value) bool {
 	}
 
 	if v.CanConvert(timeType) {
-		t := v.Convert(timeType)
+		t := v.Convert(timeType).Interface()
 		return t.Equal(unixZero) || t.IsZero()
 	}
 
